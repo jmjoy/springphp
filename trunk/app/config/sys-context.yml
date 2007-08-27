@@ -1,0 +1,18 @@
+---
+id: sys
+description: Loads system services
+
+property-points:
+  - config/config.php
+
+service-points:
+
+  Log:
+    base: !!constant BASEPATH
+    implementor:
+      class: libraries/Log.php::Log
+      properties:
+        path: !!property config.logPath
+        threshold: !!property config.logThreshold
+        dateFormat: !!property config.logDateFormat
+      initialize-method: initialize      

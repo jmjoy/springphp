@@ -1,0 +1,35 @@
+---
+id: data
+description: Demo Data Layer
+
+property-points:
+  - config/database.php
+  - config/sqlmaps.php
+
+service-points:
+
+  datasource:
+    base: !!constant BASEPATH
+    implementor:
+      class: database/Datasource.php::Datasource
+      properties:
+        hostname: !!property db.hostname
+        username: !!property db.username
+        password: !!property db.password
+        database: !!property db.database
+        dbDriver: !!property db.driver
+        usePersistentConnection: TRUE
+      initialize-method: load
+
+  sqlMapper:
+    base: !!constant BASEPATH
+    implementor:
+      class: database/SQLMapper.php::SQLMapper
+      properties:
+        datasource: !!service datasource
+        sqlMaps: !!property sqlmaps
+
+  postDAO:
+    implementor:
+      autowire: true
+      class: daos/PostDAO.php::PostDAO

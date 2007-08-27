@@ -1,0 +1,49 @@
+---
+id: app
+description: Demo Controllers
+
+includes:
+  - config/sys-context.yml
+  - config/data-context.yml
+
+property-points:
+  - config/messages.php
+
+abstract-service-points:
+
+  editpost:
+    implementor:
+      autowire: true
+      properties:
+        formView: editpost
+        successView: redirect:/
+        commandClass: Post
+        validators:
+          - !!autowire logic/validators/PostValidator.php::PostValidator        
+
+service-points:
+
+  /:
+    implementor:
+      autowire: true
+      class: controllers/HomeController.php::HomeController
+      properties:
+        viewName: index
+        
+  /createpost:
+    extends: editpost
+    implementor:
+      class: controllers/post/CreatePostController.php::CreatePostController
+        
+  /editpost/*:
+    extends: editpost
+    implementor:
+      class: controllers/post/EditPostController.php::EditPostController
+        
+  /deletepost/*:
+    implementor:
+      autowire: true
+      class: controllers/post/DeletePostController.php::DeletePostController
+      properties:
+        successView: redirect:/
+            
