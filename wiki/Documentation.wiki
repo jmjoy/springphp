@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#summary Preliminary User Guide & Documentation
 
 = History of Spring PHP =
 
@@ -249,4 +249,3 @@ Plugins
 	DB/ActiveRecord library
 
 }}}	
-
